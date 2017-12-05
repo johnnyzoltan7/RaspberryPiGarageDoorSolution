@@ -22,7 +22,7 @@ Once you have your Raspberry Pi up and running, you are going to want to have a 
 sudo apt-get update
 sudo apt-get upgrade
 ```
-##### install [WiringPi](http://wiringpi.com/download-and-install/) (summarized below)
+###### install [WiringPi](http://wiringpi.com/download-and-install/) (summarized below)
 Now we need to install GIT:
 ```sh
 sudo apt-get install git-core
@@ -42,3 +42,6 @@ Finally, we can use the included script to build and install the dependencies fo
 cd ~/wiringPi
 ./build
 ```
+###### install Apache && php
+********************************************
+## Please check back for an update on further instructions... They will be up by 12/7/2017!!!
