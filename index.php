@@ -26,8 +26,8 @@
 </head>
 <body>
   <?php
-  $username = "johnathan"; 
-  $pw = "89e20050bb32a30786b3f9b12a034cbc84d7b45d8a372269fde652cfdc6974d0";
+  $username = "ENTER desired username here"; 
+  $pw = "ENTER sha256 digest here!!!";
 
   $input = openssl_digest($_POST['password'], "sha256");
 
