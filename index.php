@@ -132,7 +132,7 @@
     <footer class="mbr-small-footer mbr-section mbr-section-nopadding" id="footer2-2" data-rv-view="6" style="background-color: rgb(52, 73, 94); padding-top: 3.5rem; padding-bottom: 3.5rem;">
 
       <div class="container">
-        <p class="text-xs-center lead">Copyright (c) 2017&nbsp;<a href="http://johnathanz.com">J</a>ohnathan Zamora.</p>
+        <p class="text-xs-center lead">Copyright (c) 2017&nbspgeneric information</p>
       </div>
     </footer>
 
