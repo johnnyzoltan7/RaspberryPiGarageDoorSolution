@@ -9,7 +9,7 @@ case $status in
     1*)
     	## the circuit is off
     	gpio write 7 0
-    	sleep 4
+    	sleep 4 ### YOU MAY NEED TO ADJUST THIS
     	gpio write 7 1
     ;;
 esac
