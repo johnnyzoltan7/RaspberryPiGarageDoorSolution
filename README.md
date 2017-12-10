@@ -1,47 +1,72 @@
+
 # Raspberry PI Zero Garage Door Solution 
 ## Introduction
-This Project has come about because I broke my garage door remote and was too lazy to buy a new one and re-program the remote. 
-With that said: there is some required hardware that you will need in order to implement this project:
+Welcome to the Raspbery Pi Garage Door Solution page! This project contains two parts: 1) hardware and wiring, 2) software and configuration. Follow the instructions on each part in order to implement this solution on your own garage door. 
+
+## Part 1: Hardware and wiring
+This section refers to the required hardware as well as instructions for wiring your Pi accordingly. Note that the software contained with this solution assumes that you will use the exact wiring as specified here. The hardware and material requirements are:
 
  - Raspberry Pi (A/B/Zero/W)
- - Micro SD card (4GB bare minimum, 8GB preferred minimum)
+ - Micro SD card (4GB bare minimum, 8GB preferred minimum) with latest Raspbian OS
  - GPIO input/output wiring
- - 5v Relay: I recommend this [one](https://www.amazon.com/dp/B00VH8926C/ref=asc_df_B00VH8926C5292177/?tag=hyprod-20&creative=395033&creativeASIN=B00VH8926C&linkCode=df0&hvadid=196274408286&hvpos=1o4&hvnetw=g&hvrand=8617023651448850265&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9030088&hvtargid=pla-315539484865)  or silmilar
- - Garage door
- - WiFi Dongle (unless using the Pi Zero, which is built in)
- - I recommend a small breadboard to help you prototype your unit
-********************************************
-## Setting up your Pi
-There are some dependencies that you will need in order to start & complete this project. First, lets set up your Pi computer. I built my system using the Raspberry Pi Zero. I will continue these instructions assuming that you will follow along using a Pi Zero; feel free to adjust these instructions based on your hardware choices. 
+ - 5v Relay: I recommend as well as assume you will use this [one](https://www.amazon.com/dp/B00VH8926C/ref=asc_df_B00VH8926C5292177/?tag=hyprod-20&creative=395033&creativeASIN=B00VH8926C&linkCode=df0&hvadid=196274408286&hvpos=1o4&hvnetw=g&hvrand=8617023651448850265&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9030088&hvtargid=pla-315539484865)
+ - WiFi Dongle (unless using the Pi W)
 
-##### Initialize your pi 
-If you are comfortable setting up your raspberry Pi on your own, go ahead and skip this section. I recommend that you follow [these instructions](https://www.raspberrypi.org/documentation/installation/) for a super quick installation guide. You can do it yourself, or download software that will help you format/install the required Image on your Raspberry Pi. 
-##### Acquiring dependencies
-Once you have your Raspberry Pi up and running, you are going to want to have a few dependencies installed. Open up a new terminal window and use 'apt-get' to obtain them. First, lets make sure everything is up to date:
+#### Wiring the Pi to the relay
+
+#### Wiring the relay to the garage door
+
+## Part 2: Software and configuration
+#### Pre-requisite software
+This solution relies on using an Apache web server with PHP in order to create a online login system to trigger the garage door relay from any internet browser on your network. Instructions for installing both pre-requisite softwares can be found [here](https://www.raspberrypi.org/documentation/remote-access/web-server/apache.md). Once you have Apache and PHP installed on your pi, delete the existing index.html or index.php file found at:
 ```sh
-sudo apt-get update
-sudo apt-get upgrade
+/var/www/html/
 ```
-###### install [WiringPi](http://wiringpi.com/download-and-install/) (summarized below)
-Now we need to install GIT:
-```sh
-sudo apt-get install git-core
-```
-Run the following to obtain wiringPi:
+You will also need to install wiringPi from [here](http://wiringpi.com/download-and-install/) in order to interface with the GPIO on your raspberry pi. 
+#### Installation
+From your pi computer, download this project using git by typing the following commands into the Terminal:
 ```sh
 cd
-git clone git://git.drogon.net/wiringPi
+git clone https://github.com/johnnyzoltan7/RaspberryPiGarageDoorSolution.git
 ```
-Now lets make sure we get the latest version:
+ Alternatively, you can download the project as a zip file directly from Github by clicking [here](https://github.com/johnnyzoltan7/RaspberryPiGarageDoorSolution/archive/master.zip) and transfer the unzipped files to your pi to a known directory.
+
+From your pi computer, move the 'garagePi' folder to the location:
+```c
+/home/pi/
+```
+Next, move index.php, toggle.php, and the 'assets' folder to the following location:
 ```sh
-cd ~/wiringPi
-git pull origin
+/var/www/html/
 ```
-Finally, we can use the included script to build and install the dependencies for us:
+#### Configuration
+First, change line# 29 inside of index.php to reflect the username that you wish to use when you login to your system. Next, generate a password hash by typing the following command into Terminal:
 ```sh
-cd ~/wiringPi
-./build
+php -r 'print openssl_digest("YOUR-PASSWORD-HERE", "sha256");print "\n" ;'
 ```
-###### install Apache && php
-********************************************
-## Please check back for an update on further instructions... They will be up by 12/7/2017!!!
+Copy the resulted string and paste into line #30 inside of index.php.
+
+You will also need to make both 'initialize.sh' and 'toggle_door.sh' executable by typing the following commands into Terminal:
+```sh
+cd /home/pi/garagePi/
+chmod 755 initialize.sh
+chmod 755 toggle_door.sh
+```
+Next, we need set up your pi to execute your GPIO pin 7 in an output mode every time you boot or reboot your pi. To do this, type the following commands into the Terminal:
+```sh
+cd /home/pi/garagePi/
+./initialize.sh
+sudo mv initialize.sh /etc/init.d/
+update-rc.d initialize.sh defaults
+```
+Finally, and with caution, we need to allow your server to execute 1 script as root. This can be done (caution, this is not secure) by typing the following command into Terminal:
+```sh
+sudo visudo
+```
+At the very bottom of the file, add the following line of code:
+```txt
+www-data ALL=NOPASSWD: /var/www/html/toggle.php
+```
+Save the file before exiting out of the text editor.
+#### Accessing your new login
+In any web browser, type your pi computer's [IP address](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/finding-your-pis-ip-address) into the address bar to navigate to your new login page. Now you can log on and toggle your garage door from any web browser that is connected to your local network.
