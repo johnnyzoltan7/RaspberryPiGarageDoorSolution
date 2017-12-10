@@ -76,7 +76,7 @@
         }
         function onSuccess(data)
         {
-          alert("You have toggled the door. do something cooler than this.");
+          alert("You have toggled your garage door!");
         }
         function systemError(jqXHR, status, error)
         {
