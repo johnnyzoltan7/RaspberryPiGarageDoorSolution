@@ -19,7 +19,7 @@ It is important to get a good connection when you solder your wire to your remot
 #### PREFERED OPTION
 ![Alt text](/circuit0.jpg?raw=true "Prototype 1")
 #### ALTERNATIVE OPTION
-This is the option that I had to use because my remote has broken and cannot hold a battery. I simply run a connection from GPIO pin 2 to the left power pin on the garage remote, and I run a another connection from GPIO pin 25 to the power pin on the right side of the garage door remote ('left' and 'right' are relative to the photo below). 
+This is the option that I had to use because my remote has broken and cannot hold a battery. I simply run a connection from GPIO pin 2 to the right power pin on the garage remote, and I run a another connection from GPIO pin 25 to the power pin on the left side of the garage door remote ('left' and 'right' are relative to the photo below). 
 ![Alt text](/circuit4.jpg?raw=true "Prototype 2")
 
 
