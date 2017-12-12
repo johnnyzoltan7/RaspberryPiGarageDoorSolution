@@ -12,9 +12,13 @@ This section refers to the required hardware as well as instructions for wiring 
  - 5v Relay: I recommend as well as assume you will use this [one](https://www.amazon.com/dp/B00VH8926C/ref=asc_df_B00VH8926C5292177/?tag=hyprod-20&creative=395033&creativeASIN=B00VH8926C&linkCode=df0&hvadid=196274408286&hvpos=1o4&hvnetw=g&hvrand=8617023651448850265&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9030088&hvtargid=pla-315539484865)
  - WiFi Dongle (unless using the Pi W)
 
-#### Wiring the Pi to the relay
+#### Wiring the Pi to the relay and Remote
+![Alt text](/circuit.jpg?raw=true "Wiring Diagram")
+![Alt text](/circuit1.jpg?raw=true "Wiring Diagram")
+It is important to get a good connection when you solder your wire to your remote. It is also worth noting that many different garage door remotes have similar circuits which we can hack in the exact way as above. 
+![Alt text](/circuit4.jpg?raw=true "Prototype 1")
+![Alt text](/circuit0.jpg?raw=true "Prototype 2")
 
-#### Wiring the relay to the garage door
 
 ## Part 2: Software and configuration
 #### Pre-requisite software
