@@ -14,7 +14,6 @@ This section refers to the required hardware as well as instructions for wiring 
 
 #### Wiring the Pi to the relay and Remote
 ![Alt text](/circuit.jpg?raw=true "Wiring Diagram")
-![Alt text](/circuit1.jpg?raw=true "Wiring Diagram")
 It is important to get a good connection when you solder your wire to your remote. It is also worth noting that many different garage door remotes have similar circuits which we can hack in the exact way as above. 
 #### PREFERED OPTION
 ![Alt text](/circuit0.jpg?raw=true "Prototype 1")
